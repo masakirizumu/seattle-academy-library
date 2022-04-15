@@ -16,7 +16,6 @@ import jp.co.seattle.library.dto.UserInfo;
 import jp.co.seattle.library.service.BooksService;
 import jp.co.seattle.library.service.UsersService;
 
-
 /**
  * アカウント作成コントローラー
  */
@@ -41,9 +40,8 @@ public class AccountController {
      * @param password パスワード
      * @param passwordForCheck 確認用パスワード
      * @param model
-     * @return ホーム画面に遷移
+     * @return　ホーム画面に遷移
      */
-    
     @Transactional
     @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
     public String createAccount(Locale locale,
@@ -59,23 +57,25 @@ public class AccountController {
         userInfo.setEmail(email);
 
         // TODO バリデーションチェック、パスワード一致チェック実装
+        
         boolean validPass = password.matches("^[a-zA-Z0-9]{8,}$");
         
-        if(!(validPass)) {
-        	model.addAttribute("validerror", "パスワードは半角英数8文字以上");
+        
+        if (!validPass) {
+        	model.addAttribute("validError","パスワードは半角英数8文字以上");
         	return "createAccount";
         } 
         
         if (!(password.equals(passwordForCheck))) {
-        	model.addAttribute("passworderror", "パスワードが一致しません");
+        	 model.addAttribute("passError","パスワードが一致しません");
         	return "createAccount";
         }
-        
+
+
         userInfo.setPassword(password);
         usersService.registUser(userInfo);
 
-        //
-        model.addAttribute("bookList", booksService.getBookList());
+       
         return "login";
     }
 
