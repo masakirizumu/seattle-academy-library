@@ -33,10 +33,13 @@ public class BooksService {
 
         // TODO 取得したい情報を取得するようにSQLを修正
         List<BookInfo> getedBookList = jdbcTemplate.query(
-                "select * from books",
+               "SELECT * FROM books order by title ASC",
+                
                 new BookInfoRowMapper());
 
         return getedBookList;
+        
+        
     }
 
     /**
@@ -69,7 +72,8 @@ public class BooksService {
                 + bookInfo.getThumbnailUrl() + "',"
                 + "now(),"
                 + "now())";
-
-        jdbcTemplate.update(sql);
+                 jdbcTemplate.update(sql);
+        
+      
     }
 }
