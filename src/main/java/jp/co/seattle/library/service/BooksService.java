@@ -35,8 +35,8 @@ public class BooksService {
         List<BookInfo> getedBookList = jdbcTemplate.query(
                "SELECT id,title,author,publisher,publish_date,thumbnail_url FROM books order by title ASC",
                 new BookInfoRowMapper());
-
         return getedBookList;
+        
         
         
     }
@@ -74,5 +74,13 @@ public class BooksService {
                  jdbcTemplate.update(sql);
         
       
+    }
+    
+    public void deleteBook (int bookId) {
+    	
+    	String sql = "delete from books where id ="+ bookId ;
+		    	
+		    	 jdbcTemplate.update(sql);
+    	
     }
 }
