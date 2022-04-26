@@ -53,6 +53,9 @@ public class AddBooksController {
             @RequestParam("author") String author,
             @RequestParam("publisher") String publisher,
             @RequestParam("thumbnail") MultipartFile file,
+            @RequestParam("publish_date") String publishDate,
+            @RequestParam("isbn") String isbn,
+            @RequestParam("explanation") String explanation,
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
 
@@ -61,6 +64,12 @@ public class AddBooksController {
         bookInfo.setTitle(title);
         bookInfo.setAuthor(author);
         bookInfo.setPublisher(publisher);
+		bookInfo.setPublishDate(publishDate);
+        bookInfo.setIsbn(isbn);
+        bookInfo.setExplanation(explanation);
+        
+        
+       
 
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
@@ -83,7 +92,34 @@ public class AddBooksController {
                 return "addBook";
             }
         }
-
+        
+        boolean DetailCheck =(title.isEmpty() || author.isEmpty()|| publisher.isEmpty()|| publishDate.isEmpty());  
+        boolean PublishDateCheck = publishDate.matches("^[0-9]{8}$");
+        boolean IsbnCheck1 = isbn.matches("^[0-9]{10}$");
+        boolean IsbnCheck2 = isbn.matches("^[0-9]{13}$");
+        
+        if (DetailCheck) {
+        	model.addAttribute("DetailError","必須項目が空欄です。入力してください。");
+        		    	
+        }
+        if(!PublishDateCheck){
+        	model.addAttribute("PublishDateError","出版日は半角数字YYYY/MM/DDで入力してください。");
+        		
+        }
+        if (!IsbnCheck1&&!IsbnCheck2) {
+        	model.addAttribute("IsbnError","ISBNの桁数または、半角数字になっているか確認してください。");
+        		        	
+        }
+       
+        if (DetailCheck || !PublishDateCheck || !IsbnCheck1 && !IsbnCheck2){
+        	model.addAttribute("bookInfo",bookInfo);
+        return "addBook";
+    	}
+        
+        
+        
+                                                        
+        
         // 書籍情報を新規登録する
         booksService.registBook(bookInfo);
 
@@ -91,6 +127,10 @@ public class AddBooksController {
 
         // TODO 登録した書籍の詳細情報を表示するように実装
         //  詳細画面に遷移する
+      
+        model.addAttribute("bookDetailsInfo",booksService.getBookInfo(booksService.maxId()));
+     
+       
         return "details";
     }
 
