@@ -93,7 +93,7 @@ public class AddBooksController {
             }
         }
         
-        boolean DetailCheck = (title.isEmpty() || author.isEmpty()|| publisher.isEmpty()|| publishDate.isEmpty());  
+        boolean DetailCheck =(title.isEmpty() || author.isEmpty()|| publisher.isEmpty()|| publishDate.isEmpty());  
         boolean PublishDateCheck = publishDate.matches("^[0-9]{8}$");
         boolean IsbnCheck1 = isbn.matches("^[0-9]{10}$");
         boolean IsbnCheck2 = isbn.matches("^[0-9]{13}$");
@@ -102,16 +102,16 @@ public class AddBooksController {
         	model.addAttribute("DetailError","必須項目が空欄です。入力してください。");
         		    	
         }
-        if (!(PublishDateCheck)) {
+        if(!PublishDateCheck){
         	model.addAttribute("PublishDateError","出版日は半角数字YYYY/MM/DDで入力してください。");
         		
         }
-        if (!(IsbnCheck1)&&!(IsbnCheck2)) {
+        if (!IsbnCheck1&&!IsbnCheck2) {
         	model.addAttribute("IsbnError","ISBNの桁数または、半角数字になっているか確認してください。");
         		        	
         }
        
-        if ((DetailCheck) || !(PublishDateCheck) ||( !(IsbnCheck1) && !(IsbnCheck2))){
+        if (DetailCheck || !PublishDateCheck || !IsbnCheck1 && !IsbnCheck2){
         	model.addAttribute("bookInfo",bookInfo);
         return "addBook";
     	}
@@ -128,7 +128,7 @@ public class AddBooksController {
         // TODO 登録した書籍の詳細情報を表示するように実装
         //  詳細画面に遷移する
       
-        model.addAttribute("bookDetailsInfo",booksService.getBookInfo(booksService.MaxId()));
+        model.addAttribute("bookDetailsInfo",booksService.getBookInfo(booksService.maxId()));
      
        
         return "details";

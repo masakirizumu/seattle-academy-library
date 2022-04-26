@@ -68,19 +68,27 @@ public class BooksService {
 				+ bookInfo.getExplanation() + "','" + bookInfo.getThumbnailUrl() + "'," + "now()," + "now())";
 		jdbcTemplate.update(sql);
 
-	}
-
+	}	
+	/**
+	 * 書籍を削除する
+	 *
+	 * @param bookId 書籍ID
+	 */
 	public void deleteBook(int bookId) {
 
 		String sql = "delete from books where id =" + bookId;
 
 		jdbcTemplate.update(sql);
 
-	}
-
-	public int MaxId() {
+	}	
+	/**
+	 * 最新の書籍IDを取得する
+	 *
+	 * @return maxId  
+	 */
+	public int maxId() {
 		String sql = "SELECT Max(id) FROM books";
-		int MaxId = jdbcTemplate.queryForObject(sql, int.class);
-		return MaxId;
+		int maxId = jdbcTemplate.queryForObject(sql, int.class);
+		return maxId;
 	}
 }
