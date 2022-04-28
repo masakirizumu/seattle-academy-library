@@ -79,7 +79,6 @@ public class BooksService {
 		String sql = "delete from books where id =" + bookId;
 
 		jdbcTemplate.update(sql);
-
 	}	
 	/**
 	 * 最新の書籍IDを取得する
@@ -91,4 +90,24 @@ public class BooksService {
 		int maxId = jdbcTemplate.queryForObject(sql, int.class);
 		return maxId;
 	}
-}
+	
+	/**
+	 * 書籍を編集する	 *	  
+	 */
+	public void editBook(BookDetailsInfo bookInfo) {
+
+		String sql = "UPDATE books SET title ='"+ bookInfo.getTitle()
+									+ "',author ='"+ bookInfo.getAuthor()
+									+"',publisher ='"+ bookInfo.getPublisher()
+									+"',thumbnail_name ='"+ bookInfo.getThumbnailName()
+									+"',publish_date ='"+ bookInfo.getPublishDate()																		 
+									+"',isbn ='"+ bookInfo.getIsbn() 
+									+"',explanation ='"+ bookInfo.getExplanation() 
+									+"',thumbnail_url ='"+ bookInfo.getThumbnailUrl() 
+									+"',upd_date = now() WHERE Id ="+ bookInfo.getBookId();
+					jdbcTemplate.update(sql);
+	}
+	
+	
+
+	}
