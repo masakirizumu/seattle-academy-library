@@ -53,6 +53,9 @@
 				</div>
 			</form>
 		</div>
+		<c:if test="${!empty nullFile}">
+		<div class="error">${nullFile}</div>
+		</c:if>
 		<c:if test="${!empty countError}">
 			<div class="error">
 				<c:forEach var="error" items="${countError}">
@@ -60,6 +63,7 @@
 				</c:forEach>
 			</div>
 		</c:if>
+		
 		</div>
 	</main>
 </body>

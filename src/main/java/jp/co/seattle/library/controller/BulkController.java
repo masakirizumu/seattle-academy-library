@@ -34,39 +34,43 @@ public class BulkController {
 	@Autowired
 	private ThumbnailService thumbnailService;
 
+	
+	/**
+	 * 書籍登録
+	 * @param model モデル
+	 * @return　一括登録画面
+	 */
 	@RequestMapping(value = "/bulkRegist", method = RequestMethod.GET) // value＝actionで指定したパラメータ
 	// RequestParamでname属性を取得
 	public String login(Model model) {
 		return "bulk";
 	}
 
+	/**
+	 * 一括書籍登録
+	 * @param locale ロケール情報
+	 * @param model モデル
+	 * @param file　ファイル
+	 * @return　遷移先画面
+	 */
 	@Transactional
 	@RequestMapping(value = "/bulkRegist", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String bulk(Locale locale, Model model, @RequestParam("csvfile") MultipartFile file) {
-
+		
 		List<BookDetailsInfo> lines = new ArrayList<BookDetailsInfo>();
 		List<String> Errorlines = new ArrayList<String>();
-
+				
 		try (BufferedReader br = new BufferedReader(
 				new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
 			String line;
 			int i = 0;
-			
-			if (br.ready()) {
-				model.addAttribute("nullFile","ファイルの中身がありません。");
-			}
+									
 			while ((line = br.readLine()) != null) {
-
+				i++;
 				final String[] split = line.split(",", -1);
 
 				BookDetailsInfo bookInfo = new BookDetailsInfo();
-				bookInfo.setTitle(split[0]);
-				bookInfo.setAuthor(split[1]);
-				bookInfo.setPublisher(split[2]);
-				bookInfo.setPublishDate(split[3]);
-				bookInfo.setIsbn(split[4]);
-				
-
+								
 				boolean DetailCheck = (split[0].isEmpty() || split[1].isEmpty() || split[2].isEmpty()
 						|| split[3].isEmpty());
 				boolean PublishDateCheck = split[3].matches("^[0-9]{8}$");
@@ -74,11 +78,20 @@ public class BulkController {
 				boolean IsbnCheck2 = split[4].matches("^[0-9]{13}$");
 
 				if (DetailCheck || !PublishDateCheck || !IsbnCheck1 && !IsbnCheck2) {
-
-					i++;
-					Errorlines.add(i + "行目でエラーが発生しました。");
+					Errorlines.add(i + "行目の書籍登録でエラーが起きました。");
 				}
+				
+				bookInfo.setTitle(split[0]);
+				bookInfo.setAuthor(split[1]);
+				bookInfo.setPublisher(split[2]);
+				bookInfo.setPublishDate(split[3]);
+				bookInfo.setIsbn(split[4]);	
+				
 				lines.add(bookInfo);
+			}
+			if (lines.size() == 0) {
+				model.addAttribute("nullFile","csvに書籍情報がありません。");
+				return  "bulk";
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("ファイルが読み込めません。",e);
@@ -97,4 +110,5 @@ public class BulkController {
 	
 	        return"home";
 	}
+			
 }
