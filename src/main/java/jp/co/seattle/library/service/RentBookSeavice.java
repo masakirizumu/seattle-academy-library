@@ -13,7 +13,7 @@ public class RentBookSeavice {
 	private JdbcTemplate jdbcTemplate;
 
 	/**
-	 * 書籍を登録する
+	 * 借りる書籍を登録する
 	 *
 	 * @param bookId 書籍ID
 	 */
@@ -27,7 +27,7 @@ public class RentBookSeavice {
 	 * 書籍をカウントする
 	 *
 	 * @param bookId 書籍ID
-	 * @return 
+	 * @return countBook
 	 */
 	public int countBook() {
 
@@ -39,11 +39,32 @@ public class RentBookSeavice {
 	 * 書籍返却する
 	 *
 	 * @param bookId 書籍ID
-	 * @return 
 	 */
 	public void returnBook(int bookId) {
 		String sql = "DELETE FROM rent WHERE bookid = "+bookId;
 		jdbcTemplate.update(sql);
+
+	}
+
+	/**
+	 * 書籍情報を取得
+	 *
+	 * @param bookId 書籍ID
+	 */
+	public int delete2Book(int bookId) {
+
+		// JSPに渡すデータを設定する
+		try {
+			String sql = "SELECT bookid FROM rent where bookid =" + bookId;
+			int returnId = jdbcTemplate.queryForObject(sql, int.class);
+			return returnId;
+
+		} catch (Exception e) {
+			return 0;
+		}
+
 	}
 
 }
+
+

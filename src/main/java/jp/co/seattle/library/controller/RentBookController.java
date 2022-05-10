@@ -20,29 +20,38 @@ public class RentBookController {
 	final static Logger logger = LoggerFactory.getLogger(EditBooksController.class);
 
 	@Autowired
-    private BooksService booksService;
+	private BooksService booksService;
 	@Autowired
 	private RentBookSeavice rentService;
 
+
+	/**
+	 * 書籍を借りる
+	 * 
+	 * @param locale ロケール情報
+	 * @param bookId 書籍ID
+	 * @param model モデル情報
+	 * @return 遷移先画面名
+	 */
 	@Transactional
 	@RequestMapping(value = "/rentBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	// RequestParamでname属性を取得
 	public String rentBook(Model model, Locale locale, @RequestParam("bookId") int bookId) {
-		
+
 		int count1 = rentService.countBook();
-						
+
 		rentService.rentBook(bookId);
-		 model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-					
-		
+		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+
+
 		int count2 = rentService.countBook();
-		
+
 		if(count1==count2){
 			model.addAttribute("countError","貸し出し済みです。");
-							
+
+		}
+
+		return "details";
 	}
-	    	
-	        return "details";
-	    }
-	
+
 }

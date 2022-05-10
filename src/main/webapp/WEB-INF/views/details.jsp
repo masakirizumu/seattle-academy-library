@@ -58,6 +58,9 @@
 				<c:if test="${!empty returnError}">
 				<div class="error">${returnError}</div>
 					</c:if>
+				<c:if test="${!empty return2Error}">
+				<div class="error">${return2Error}</div>
+					</c:if>
 			</div>
 			<div class="content_right">
 				<div>
