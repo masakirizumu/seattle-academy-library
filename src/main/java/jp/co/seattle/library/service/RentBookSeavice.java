@@ -24,7 +24,7 @@ public class RentBookSeavice {
 	}
 
 	/**
-	 * 書籍をする
+	 * 書籍をカウントする
 	 *
 	 * @param bookId 書籍ID
 	 * @return 
@@ -34,6 +34,16 @@ public class RentBookSeavice {
 		String sql = "SELECT COUNT (id) FROM rent";
 		int countBook = jdbcTemplate.queryForObject(sql, int.class);
 		return countBook;
+	}
+	/**
+	 * 書籍返却する
+	 *
+	 * @param bookId 書籍ID
+	 * @return 
+	 */
+	public void returnBook(int bookId) {
+		String sql = "DELETE FROM rent WHERE bookid = "+bookId;
+		jdbcTemplate.update(sql);
 	}
 
 }
