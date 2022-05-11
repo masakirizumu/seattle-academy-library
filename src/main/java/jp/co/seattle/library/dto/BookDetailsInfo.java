@@ -13,6 +13,8 @@ import lombok.Data;
 public class BookDetailsInfo {
 
     private int bookId;
+    
+    private int rentBookId;
 
     private String title;
 

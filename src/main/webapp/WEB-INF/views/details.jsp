@@ -52,16 +52,19 @@
 						value="${bookDetailsInfo.bookId}">
 					</a>
 				</div>
-				<c:if test="${!empty countError}">
-				<div class="error">${countError}</div>
-					</c:if>
-				<c:if test="${!empty returnError}">
-				<div class="error">${returnError}</div>
-					</c:if>
-				<c:if test="${!empty return2Error}">
-				<div class="error">${return2Error}</div>
-					</c:if>
-			</div>
+                <c:if test="${bookDetailsInfo.rentBookId == 0}">
+                    <span>貸し出し可</span>
+                </c:if>
+                <c:if test="${bookDetailsInfo.rentBookId != 0}">
+                    <span>貸し出し中</span>
+                </c:if>
+                <c:if test="${!empty countError}">
+                    <div class="error">${countError}</div>
+                </c:if>
+                <c:if test="${!empty returnError}">
+                    <div class="error">${returnError}</div>
+                </c:if>
+            </div>
 			<div class="content_right">
 				<div>
 					<span>書籍名</span>
