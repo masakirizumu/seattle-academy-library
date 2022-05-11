@@ -98,12 +98,20 @@ public class BooksService {
 	 */
 	public void editBook(BookDetailsInfo bookInfo) {
 
-		String sql = "UPDATE books SET title ='" + bookInfo.getTitle() + "',author ='" + bookInfo.getAuthor()
-				+ "',publisher ='" + bookInfo.getPublisher() + "',thumbnail_name ='" + bookInfo.getThumbnailName()
-				+ "',publish_date ='" + bookInfo.getPublishDate() + "',isbn ='" + bookInfo.getIsbn()
-				+ "',explanation ='" + bookInfo.getExplanation() + "',thumbnail_url ='" + bookInfo.getThumbnailUrl()
-				+ "',upd_date = now() WHERE Id =" + bookInfo.getBookId();
+
+		String sql = "UPDATE books SET title ='"+ bookInfo.getTitle()
+		+ "',author ='"+ bookInfo.getAuthor()
+		+"',publisher ='"+ bookInfo.getPublisher()
+		+"',thumbnail_name ='"+ bookInfo.getThumbnailName()
+		+"',publish_date ='"+ bookInfo.getPublishDate()																		 
+		+"',isbn ='"+ bookInfo.getIsbn() 
+		+"',explanation ='"+ bookInfo.getExplanation() 
+		+"',thumbnail_url ='"+ bookInfo.getThumbnailUrl() 
+		+"',upd_date = now() WHERE Id ="+ bookInfo.getBookId();
 		jdbcTemplate.update(sql);
 	}
+
+
+
 
 }
