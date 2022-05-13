@@ -94,7 +94,7 @@ public class BooksService {
 	}
 
 	/**
-	 * 書籍を登録
+	 * 書籍を編集する
 	 * @param bookInfo
 	 */
 	public void editBook(BookDetailsInfo bookInfo) {
