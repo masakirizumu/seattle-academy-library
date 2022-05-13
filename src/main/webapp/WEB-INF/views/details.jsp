@@ -46,6 +46,10 @@
                 <c:if test="${!empty countError}">
                     <div class="error">${countError}</div>
                 </c:if>
+                <c:if test="${!empty returnError}">
+                    <div class="error">${returnError}</div>
+                </c:if>
+                
             </div>
             <div class="content_right">
                 <div>
@@ -78,7 +82,7 @@
             <form method="post" action="rentBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button>
             </form>
-            <form method="post" action="renturn">
+            <form method="post" action="returnBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_returnBook">返す</button>
             </form>
             <form method="post" action="editBook">
