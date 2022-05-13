@@ -39,14 +39,14 @@ public class ReturnBookController {
 	    public String returnBook(Model model, Locale locale, @RequestParam("bookId") int bookId) {
 	        
 	//貸し出しエラー表示
-		 int BforeCount = rentService.countBook();
+		 int beforeCount = rentService.countBook();
 	    		  
 	        rentService.returnBook(bookId);
 	        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 	        
-	      int AfterCount = rentService.countBook();
+	      int afterCount = rentService.countBook();
 			
-			if(BforeCount==AfterCount){
+			if(beforeCount==afterCount){
 				model.addAttribute("returnError","貸し出しされていません。"); 
 			}
 
