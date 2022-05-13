@@ -31,16 +31,16 @@ public class RentBookController {
 
 		//借りるボタンを1度押す前まで数をカウント
 
-		int count1 = rentService.countBook();
+		int beforeCount = rentService.countBook();
 
 		rentService.rentBook(bookId);
 		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
 
 		//借りるボタンを押した後の数をカウント
-		int count2 = rentService.countBook();
+		int afterCount = rentService.countBook();
 
-		if(count1==count2){
+		if(beforeCount==afterCount){
 			model.addAttribute("countError","貸し出し済みです。");
 
 
