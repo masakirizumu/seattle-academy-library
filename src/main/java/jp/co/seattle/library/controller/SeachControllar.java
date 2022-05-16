@@ -20,6 +20,13 @@ public class SeachControllar {
 	 @Autowired
 	    private BooksService booksService;
 
+	 /**
+	  * 検索結果をホーム画面へ
+	  * @param locale
+	  * @param title
+	  * @param model
+	  * @return ホーム画面
+	  */
 	 @RequestMapping(value = "/seach", method = RequestMethod.POST) //value＝actionで指定したパラメータ
 	    //RequestParamでname属性を取得
 	    public String tranjitionSeach(Locale locale,@RequestParam("title") String title,Model model) {

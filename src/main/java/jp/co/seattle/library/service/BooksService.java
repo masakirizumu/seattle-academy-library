@@ -110,8 +110,9 @@ public class BooksService {
 
 	
 	/**
-	 * 検索
+	 * 部分一致での検索
 	 * @param title
+	 * @return getedBookList
 	 */
 	public List<BookInfo> seachBook(String title) {
 		
