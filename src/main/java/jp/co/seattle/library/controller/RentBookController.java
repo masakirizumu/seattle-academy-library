@@ -28,17 +28,21 @@ public class RentBookController {
 	@RequestMapping(value = "/rentBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	// RequestParamでname属性を取得
 	public String rentBook(Model model, Locale locale, @RequestParam("bookId") int bookId) {
+
 		//借りるボタンを1度押す前まで数をカウント
-		int count1 = rentService.countBook();
+
+		int beforeCount = rentService.countBook();
 
 		rentService.rentBook(bookId);
 		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
-		//借りるボタンを押した後の数をカウント
-		int count2 = rentService.countBook();
 
-		if(count1==count2){
+		//借りるボタンを押した後の数をカウント
+		int afterCount = rentService.countBook();
+
+		if(beforeCount==afterCount){
 			model.addAttribute("countError","貸し出し済みです。");
+
 
 		}
 
