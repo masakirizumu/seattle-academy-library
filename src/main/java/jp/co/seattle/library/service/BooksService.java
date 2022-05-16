@@ -108,6 +108,16 @@ public class BooksService {
 		jdbcTemplate.update(sql);
 	}
 
-
-
+	
+	/**
+	 * 検索
+	 * @param title
+	 */
+	public List<BookInfo> seachBook(String title) {
+		
+		List<BookInfo> getedBookList = jdbcTemplate.query(
+				"SELECT id,title,author,publisher,publish_date,isbn,explanation,thumbnail_url FROM books WHERE title LIKE'%"+title+"%'order by title ASC",
+				new BookInfoRowMapper());
+		return getedBookList;
+	}
 }
