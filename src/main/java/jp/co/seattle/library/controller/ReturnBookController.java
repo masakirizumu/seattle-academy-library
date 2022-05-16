@@ -17,6 +17,7 @@ import jp.co.seattle.library.service.RentBookSeavice;
 
 @Controller //APIの入り口
 public class ReturnBookController {
+
 	
 	 final static Logger logger = LoggerFactory.getLogger(ReturnBookController.class);
 	    
@@ -52,4 +53,5 @@ public class ReturnBookController {
 
 	        return "details";
 	 }
+
 }

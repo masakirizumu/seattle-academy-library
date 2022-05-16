@@ -24,6 +24,15 @@ public class RentBookController {
 	@Autowired
 	private RentBookSeavice rentService;
 
+
+	/**
+	 * 書籍を借りる
+	 * 
+	 * @param locale ロケール情報
+	 * @param bookId 書籍ID
+	 * @param model モデル情報
+	 * @return 遷移先画面名
+	 */
 	@Transactional
 	@RequestMapping(value = "/rentBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	// RequestParamでname属性を取得
@@ -31,14 +40,18 @@ public class RentBookController {
 
 		//借りるボタンを1度押す前まで数をカウント
 
+
 		int beforeCount = rentService.countBook();
+
 
 		rentService.rentBook(bookId);
 		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
 
 		//借りるボタンを押した後の数をカウント
+
 		int afterCount = rentService.countBook();
+
 
 		if(beforeCount==afterCount){
 			model.addAttribute("countError","貸し出し済みです。");
