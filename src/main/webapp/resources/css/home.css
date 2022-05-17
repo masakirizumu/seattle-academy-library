@@ -66,7 +66,7 @@ input {
 }
 
 /* ここから追加 */
-.content_right {
+.content_right1 {
 	display:flex;
 	justify-content:space-between;
 }
@@ -187,13 +187,14 @@ a:hover, button:hover {
 .add_book_content, .detail_book_content {
     justify-content: center;
     margin-top: 20px;
+    
 }
 
 .add_book_content .content_right, .detail_book_content .content_right {
     margin-left: 20px;
 }
 .content_right input, .detail_book_content .content_right p {
-   
+   	border-bottom:1px solid #cccccc;
     margin: 5px 0 15px;
     font-size: 15px;
 }
