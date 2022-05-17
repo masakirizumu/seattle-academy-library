@@ -26,11 +26,12 @@
     </header>
     <main>
         <h1>Home</h1>
-       
-        <form action="<%=request.getContextPath()%>/seach" method="post">
+       <div class="content_right">
+            <form action="<%=request.getContextPath()%>/seach" method="post">
             <input type="search" name="title" class="search1">
             <input type="submit" name="seach_title" value="検索" class="search_box"> 
         </form>
+        </div>
         <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkRegist" class="btn_bulk_book">一括登録</a>
         <div class="content_body">
             <c:if test="${!empty resultMessage}">
