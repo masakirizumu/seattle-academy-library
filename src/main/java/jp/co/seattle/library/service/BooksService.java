@@ -124,6 +124,15 @@ public class BooksService {
 				new BookInfoRowMapper());
 		return getedBookList;
 	}
+	public List<BookInfo> allSeachBook(String title) {
+		
+		List<BookInfo> getedBookList = jdbcTemplate.query(
+				"SELECT * FROM books WHERE title ='"+title+"'",
+				new BookInfoRowMapper());
+		return getedBookList;
+	}
+	
+	
 
 
 
