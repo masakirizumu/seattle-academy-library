@@ -68,7 +68,8 @@ public class BooksService {
 				+ bookInfo.getExplanation() + "','" + bookInfo.getThumbnailUrl() + "'," + "now()," + "now())";
 		jdbcTemplate.update(sql);
 
-	}	
+	}
+
 	/**
 	 * 書籍を削除する
 	 *
@@ -79,11 +80,12 @@ public class BooksService {
 		String sql = "delete from books where id =" + bookId;
 
 		jdbcTemplate.update(sql);
-	}	
+	}
+
 	/**
 	 * 最新の書籍IDを取得する
 	 *
-	 * @return maxId  
+	 * @return maxId
 	 */
 	public int maxId() {
 		String sql = "SELECT Max(id) FROM books";
@@ -92,9 +94,11 @@ public class BooksService {
 	}
 
 	/**
-	 * 書籍を編集する	 *	  
+	 * 書籍を編集する
+	 * @param bookInfo
 	 */
 	public void editBook(BookDetailsInfo bookInfo) {
+
 
 		String sql = "UPDATE books SET title ='"+ bookInfo.getTitle()
 		+ "',author ='"+ bookInfo.getAuthor()
@@ -108,17 +112,9 @@ public class BooksService {
 		jdbcTemplate.update(sql);
 	}
 
-	
-	/**
-	 * 部分一致での検索
-	 * @param title
-	 * @return getedBookList
-	 */
-	public List<BookInfo> seachBook(String title) {
-		
-		List<BookInfo> getedBookList = jdbcTemplate.query(
-				"SELECT id,title,author,publisher,publish_date,isbn,explanation,thumbnail_url FROM books WHERE title LIKE'%"+title+"%'order by title ASC",
-				new BookInfoRowMapper());
-		return getedBookList;
-	}
+
+
+
+
+
 }
