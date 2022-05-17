@@ -25,8 +25,9 @@
         </div>
     </header>
     <main>
-        <h1>Home</h1>
+        
        <div class="content_right">
+            <h1>Home</h1>
             <form action="<%=request.getContextPath()%>/seach" method="post">
             <input type="search" name="title" class="search1">
             <input type="submit" name="seach_title" value="検索" class="search_box"> 

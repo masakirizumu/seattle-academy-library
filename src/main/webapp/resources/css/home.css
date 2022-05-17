@@ -37,10 +37,7 @@ input {
     margin: 35px 30px 0 0;
 }
 
-.content_right {
-	display:flex;
-	justify-content:right;
-}
+
 .body {
     width: 100%;
     text-align: center;
@@ -69,6 +66,11 @@ input {
 }
 
 /* ここから追加 */
+.content_right {
+	display:flex;
+	justify-content:space-between;
+}
+
 .search_box {
     position: relative;
     margin-left: 20px;
@@ -191,7 +193,7 @@ a:hover, button:hover {
     margin-left: 20px;
 }
 .content_right input, .detail_book_content .content_right p {
-    border-bottom: 1px solid #cccccc;
+   
     margin: 5px 0 15px;
     font-size: 15px;
 }
