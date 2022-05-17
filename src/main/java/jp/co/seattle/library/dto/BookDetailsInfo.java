@@ -12,7 +12,11 @@ import lombok.Data;
 @Data
 public class BookDetailsInfo {
 
-    private int bookId;
+    private int bookId;  
+    
+    private int rentBookId;
+    
+    private String status;
 
     private String title;
 
