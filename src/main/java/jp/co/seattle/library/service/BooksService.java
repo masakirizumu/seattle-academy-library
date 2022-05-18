@@ -111,6 +111,34 @@ public class BooksService {
 		jdbcTemplate.update(sql);
 	}
 
+	
+	/**
+	 * 部分一致での検索
+	 * @param title
+	 * @return getedBookList
+	 */
+	public List<BookInfo> seachBook(String title) {
+		
+		List<BookInfo> getedBookList = jdbcTemplate.query(
+				"SELECT id,title,author,publisher,publish_date,isbn,explanation,thumbnail_url FROM books WHERE title LIKE'%"+title+"%'order by title ASC",
+				new BookInfoRowMapper());
+		return getedBookList;
+	}
+	public List<BookInfo> allSeachBook(String title) {
+		
+		List<BookInfo> getedBookList = jdbcTemplate.query(
+				"SELECT * FROM books WHERE title ='"+title+"'",
+				new BookInfoRowMapper());
+		return getedBookList;
+	}
+	
+	
+
+
+
+
+
+
 
 
 
