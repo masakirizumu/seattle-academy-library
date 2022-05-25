@@ -18,8 +18,8 @@ public class RentBookSeavice {
 	 * @param bookId 書籍ID
 	 */
 	public void rentBook(int bookId) {
-		String sql = "insert into rent (bookid) select " + bookId
-				+ " where NOT EXISTS (select bookid from rent where bookid=" + bookId + ")";
+		String sql = "insert into rent (bookid,rent_date) select " + bookId
+				+ ",now() where NOT EXISTS (select bookid from rent where bookid=" + bookId + ")";
 		jdbcTemplate.update(sql);
 	}
 
@@ -27,9 +27,7 @@ public class RentBookSeavice {
 	 * 書籍をカウントする
 	 *
 	 * @param bookId 書籍ID
-
 	 * @return
-
 	 */
 	public int countBook() {
 
@@ -42,15 +40,15 @@ public class RentBookSeavice {
 	 * 書籍返却する
 	 *
 	 * @param bookId 書籍ID
-
+	 * 
 	 * @return
-
+	 * 
 	 */
-	public void returnBook(int bookId) {
-		String sql = "DELETE FROM rent WHERE bookid = " + bookId;
-		jdbcTemplate.update(sql);
+	// public void returnBook(int bookId) {
+	// String sql = "DELETE FROM rent WHERE bookid = " + bookId;
+	// .update(sql);
 
-	}
+	// }
 
 	/**
 	 * 書籍情報を取得
@@ -71,6 +69,40 @@ public class RentBookSeavice {
 
 	}
 
+	/**
+	 * 新規書籍の貸出時
+	 * 指定したbookIdがrentテーブルに存在するかの情報を取得
+	 * 
+	 * @param bookId
+	 * @return historyNull
+	 * @return 0
+	 */
+	public int hisNull(int bookId) {
+		try {
+			String sql = "select bookid from rent where bookid = " + bookId;
+			int historyNull = jdbcTemplate.queryForObject(sql, int.class);
+			return historyNull;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	/**
+	 * 指定しているbookIdの貸出日をカウント数を取得
+	 * rent_dateのカウント数を基準にして
+	 * 貸出と返却をする
+	 * 
+	 * @param bookId
+	 * @return rentDateNull
+	 * @return 0
+	 */
+	public int rentNull(int bookId) {
+		try {
+			String sql = "SELECT COUNT (rent_date) FROM rent where bookid="+bookId;
+			int rentDateNull = jdbcTemplate.queryForObject(sql, int.class);
+			return rentDateNull;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
 }
-
-

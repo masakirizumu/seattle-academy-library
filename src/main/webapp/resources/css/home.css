@@ -146,7 +146,7 @@ img.book_noimg, img.book_img{
     font-size: 12px;
 }
 
-a.btn_add_book,a.btn_bulk_book, button.btn_addBook,button.btn_editBook, button.btn_deleteBook,button.btn_rentBook,button.btn_returnBook,button.btn_bulkRegist {
+a.btn_his_book,a.btn_add_book,a.btn_bulk_book, button.btn_addBook,button.btn_editBook, button.btn_deleteBook,button.btn_rentBook,button.btn_returnBook,button.btn_bulkRegist{
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
@@ -163,6 +163,9 @@ a.btn_add_book,a.btn_bulk_book, button.btn_addBook,button.btn_editBook, button.b
 a.btn_bulk_book{
 	background-color: #66cdaa;
 }
+a.btn_his_book{	
+	background-color: #FF9933;
+}
 button.btn_editBook{
     background-color: #9ec34b;
 }
@@ -178,6 +181,7 @@ button.btn_returnBook {
 button.btn_bulkRegist {
 	background-color: #FF9966;
 }
+
 
 a:hover, button:hover {
     opacity: 0.5;
@@ -291,5 +295,10 @@ hr.border_add {
 }
 .bulk_form .caution p{
 	color:#fa8072;
+}
+
+.historylist {
+	margin: 0 auto;	
+	width:700px;
 }
 

@@ -36,7 +36,9 @@
             </form>
             </div>
         </div>
-        <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkRegist" class="btn_bulk_book">一括登録</a>
+        <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> 
+        <a href="<%=request.getContextPath()%>/bulkRegist" class="btn_bulk_book">一括登録</a>
+        <a href="<%=request.getContextPath()%>/historyBook" class="btn_his_book">貸出履歴一覧</a>
             <div class="content_body">
                 <c:if test="${!empty resultMessage}">
                     <div class="error_msg">${resultMessage}</div>

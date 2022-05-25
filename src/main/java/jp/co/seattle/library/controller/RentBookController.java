@@ -24,41 +24,38 @@ public class RentBookController {
 	@Autowired
 	private RentBookSeavice rentService;
 
-
 	/**
 	 * 書籍を借りる
 	 * 
 	 * @param locale ロケール情報
 	 * @param bookId 書籍ID
-	 * @param model モデル情報
+	 * @param model  モデル情報
 	 * @return 遷移先画面名
 	 */
 	@Transactional
 	@RequestMapping(value = "/rentBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	// RequestParamでname属性を取得
 	public String rentBook(Model model, Locale locale, @RequestParam("bookId") int bookId) {
-
-		//借りるボタンを1度押す前まで数をカウント
-
-
-		int beforeCount = rentService.countBook();
-
-
-		rentService.rentBook(bookId);
-		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-
-
-		//借りるボタンを押した後の数をカウント
-
-		int afterCount = rentService.countBook();
-
-
-		if(beforeCount==afterCount){
-			model.addAttribute("countError","貸し出し済みです。");
-
-
+		
+		//書籍の貸出
+		
+		int historyNull = rentService.hisNull(bookId);
+		
+		int rentDate = rentService.rentNull(bookId);
+		
+		//書籍の新規貸し出し
+		if (historyNull == 0) {
+			rentService.rentBook(bookId);
+		} else {
+			//既存書籍を貸出の更新をする場合
+			if (rentDate == 0) {
+				booksService.hisRent(bookId);
+			} else {
+				//貸出エラー表示
+				model.addAttribute("countError", "貸し出し済みです。");
+			}
 		}
-
+		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 		return "details";
 	}
 
